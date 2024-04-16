@@ -52,8 +52,8 @@ public class RestaurantService {
             if (restaurantUpdates.getName() != null) {
                 restaurant.setName(restaurantUpdates.getName());
             }
-            if (restaurantUpdates.getRating() != null) {
-                restaurant.setRating(restaurantUpdates.getRating());
+            if (restaurantUpdates.getAverageRating() != null) {
+                restaurant.setAverageRating(restaurantUpdates.getAverageRating());
             }
             if (restaurantUpdates.getIsKosher() != null){
                 restaurant.setIsKosher(restaurantUpdates.getIsKosher());

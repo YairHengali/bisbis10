@@ -2,7 +2,6 @@ package com.att.tdp.bisbis10.Restaurant;
 
 import jakarta.persistence.*;
 
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -13,17 +12,17 @@ public class Restaurant {
     private Long id;
     private String name;
     @Column(nullable = true)
-    private Float rating;
+    private Float averageRating;
     private Boolean isKosher;
     private Set<String> cuisines;
 
     public Restaurant() {
     }
 
-    public Restaurant(Long id, String name, Float rating, Boolean isKosher, Set<String> cuisines) {
+    public Restaurant(Long id, String name, Float averageRating, Boolean isKosher, Set<String> cuisines) {
         this.id = id;
         this.name = name;
-        this.rating = rating;
+        this.averageRating = averageRating;
         this.isKosher = isKosher;
         this.cuisines = cuisines;
     }
@@ -44,12 +43,12 @@ public class Restaurant {
         this.name = name;
     }
 
-    public Float getRating() {
-        return rating;
+    public Float getAverageRating() {
+        return averageRating;
     }
 
-    public void setRating(Float rating) {
-        this.rating = rating;
+    public void setAverageRating(Float averageRating) {
+        this.averageRating = averageRating;
     }
 
     public Boolean getIsKosher() {
@@ -73,7 +72,7 @@ public class Restaurant {
         return "Restaurant{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", rating=" + rating +
+                ", averageRating=" + averageRating +
                 ", isKosher=" + isKosher +
                 ", cuisines=" + cuisines +
                 '}';
