@@ -1,6 +1,9 @@
 package com.att.tdp.bisbis10.Restaurant;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,13 +37,21 @@ public class RestaurantController {
     }
 
     @PostMapping()
-    public void addNewRestaurant(@RequestBody Restaurant restaurantToAdd){
+    public ResponseEntity<Void> addNewRestaurant(@RequestBody Restaurant restaurantToAdd){
         restaurantService.addNewRestaurant(restaurantToAdd);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
     public void updateRestaurant(@PathVariable("id") Long id, @RequestBody Restaurant restaurantUpdates) {
         restaurantService.updateRestaurant(id, restaurantUpdates);
+    }
+
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteRestaurant(@PathVariable("id") Long id) {
+        restaurantService.deleteRestaurant(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
         /*
     TODO: ADD DELETE ENDPOINT

@@ -6,7 +6,7 @@ import java.util.Set;
 
 @Entity
 @Table
-public class Restaurant {
+public class Restaurant { //TODO: change the way Avarage Rating is calculated
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
