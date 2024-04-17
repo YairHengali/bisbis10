@@ -53,7 +53,4 @@ public class RestaurantController {
         restaurantService.deleteRestaurant(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-        /*
-    TODO: ADD DELETE ENDPOINT
-     */
 }
