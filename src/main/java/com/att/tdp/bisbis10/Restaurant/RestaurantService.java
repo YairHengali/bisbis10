@@ -45,33 +45,6 @@ public class RestaurantService {
                 new ResponseStatusException(HttpStatus.NOT_FOUND, "Restaurant with this ID does not exist"));
     }
 
-//    public void updateRestaurant(Long id, Restaurant restaurantUpdates) {
-//        Optional<Restaurant> restaurantById = restaurantRepository.findRestaurantById(id);
-//        if (restaurantById.isPresent()){
-//            Restaurant restaurant = restaurantById.get();
-//
-//            if (restaurantUpdates.getName() != null) {
-//                restaurant.setName(restaurantUpdates.getName());
-//            }
-//            if (restaurantUpdates.getAverageRating() != null) {
-//                restaurant.setAverageRating(restaurantUpdates.getAverageRating());
-//            }
-//            if (restaurantUpdates.getIsKosher() != null){
-//                restaurant.setIsKosher(restaurantUpdates.getIsKosher());
-//            }
-//            if (restaurantUpdates.getCuisines() != null) {
-//                restaurant.setCuisines(restaurantUpdates.getCuisines());
-//            }
-//
-//            restaurantRepository.save(restaurant);
-//
-//
-//        }else{
-//            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Restaurant with this ID does not exist");
-//        }
-//
-//    }
-
     @Transactional
     public void updateRestaurant(Long id, Restaurant restaurantUpdates) {
         Restaurant restaurant = restaurantRepository.findById(id)
@@ -79,9 +52,6 @@ public class RestaurantService {
 
             if (restaurantUpdates.getName() != null) {
                 restaurant.setName(restaurantUpdates.getName());
-            }
-            if (restaurantUpdates.getAverageRating() != null) {
-                restaurant.setAverageRating(restaurantUpdates.getAverageRating());
             }
             if (restaurantUpdates.getIsKosher() != null){
                 restaurant.setIsKosher(restaurantUpdates.getIsKosher());

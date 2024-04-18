@@ -1,28 +1,37 @@
 package com.att.tdp.bisbis10.Restaurant;
 
+import com.att.tdp.bisbis10.Rating.Rating;
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Set;
+
+import static java.lang.Float.sum;
 
 @Entity
 @Table
 public class Restaurant { //TODO: change the way Avarage Rating is calculated
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+//    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @Column(nullable = true)
-    private Float averageRating;
     private Boolean isKosher;
     private Set<String> cuisines;
+
+    @Transient
+    private Float averageRating;
+
+    @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
+    private List<Rating> ratings;
 
     public Restaurant() {
     }
 
-    public Restaurant(Long id, String name, Float averageRating, Boolean isKosher, Set<String> cuisines) {
+    public Restaurant(Long id, String name, Boolean isKosher, Set<String> cuisines) {
         this.id = id;
         this.name = name;
-        this.averageRating = averageRating;
+//        this.averageRating = averageRating;
         this.isKosher = isKosher;
         this.cuisines = cuisines;
     }
@@ -44,12 +53,22 @@ public class Restaurant { //TODO: change the way Avarage Rating is calculated
     }
 
     public Float getAverageRating() {
-        return averageRating;
+        if (ratings.isEmpty()){
+            return null;
+        }
+
+        float ratingsSum = 0;
+        for( Rating rating : ratings){
+            ratingsSum += rating.getRating();
+        }
+
+        return ratingsSum / ratings.size();
+//        return averageRating;
     }
 
-    public void setAverageRating(Float averageRating) {
-        this.averageRating = averageRating;
-    }
+//    public void setAverageRating(Float averageRating) {
+//        this.averageRating = averageRating;
+//    }
 
     public Boolean getIsKosher() {
         return isKosher;
