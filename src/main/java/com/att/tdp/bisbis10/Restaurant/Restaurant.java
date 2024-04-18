@@ -10,7 +10,7 @@ import static java.lang.Float.sum;
 
 @Entity
 @Table
-public class Restaurant { //TODO: change the way Avarage Rating is calculated
+public class Restaurant {
     @Id
 //    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
