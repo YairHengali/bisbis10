@@ -31,7 +31,6 @@ public class RestaurantController {
     }
 
     @GetMapping("/{id}")     //TODO: return all the details from id
-
     public Restaurant getRestaurantById(@PathVariable("id") Long id) {
         return restaurantService.getRestaurantById(id);
     }
