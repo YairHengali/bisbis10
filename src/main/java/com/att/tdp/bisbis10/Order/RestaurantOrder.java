@@ -56,4 +56,5 @@ public class RestaurantOrder {
    2. need to check about the tables and their organization - can i make dish ids uniques only for a restaurant?(including their names).
    3. organize exceptions and validation of different methods.
    4. check if they updated the readme - think about how to present info about restaurants in get all.
-* */
+    5. maybe if i will create the tables in the scheme it will be easier.
+*/

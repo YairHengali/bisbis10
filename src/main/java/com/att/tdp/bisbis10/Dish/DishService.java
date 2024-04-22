@@ -1,17 +1,14 @@
 package com.att.tdp.bisbis10.Dish;
 
+import com.att.tdp.bisbis10.Exceptions.DishNotFoundException;
+import com.att.tdp.bisbis10.Exceptions.RestaurantNotFoundException;
 import com.att.tdp.bisbis10.Restaurant.Restaurant;
 import com.att.tdp.bisbis10.Restaurant.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.server.ResponseStatusException;
 
-import java.util.List;
-import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 public class DishService {
@@ -26,7 +23,7 @@ public class DishService {
 
     public void addDish(Long restId, Dish dishToAdd) {
         Restaurant restaurant = restaurantRepository.findById(restId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Restaurant with this ID does not exist"));
+                .orElseThrow(() -> new RestaurantNotFoundException(restId));
 
         dishToAdd.setRestaurant(restaurant);
         dishRepository.save(dishToAdd);
@@ -34,18 +31,18 @@ public class DishService {
 
     public Set<Dish> getDishesFromRest(Long restId) {
         restaurantRepository.findById(restId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Restaurant with this ID does not exist"));
+                .orElseThrow(() -> new RestaurantNotFoundException(restId));
 
         return dishRepository.findAllByRestaurantId(restId);
     }
 
     @Transactional
     public void updateDishInRest(Long restId, Long dishId, Dish dishUpdates) {
-        Restaurant restaurant = restaurantRepository.findById(restId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Restaurant with this ID does not exist"));
+        restaurantRepository.findById(restId)
+                .orElseThrow(() -> new RestaurantNotFoundException(restId));
 
         Dish dish = dishRepository.findDishByRestaurantIdAndId(restId,dishId)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Dish with this ID does not exist in that restaurant"));
+                .orElseThrow(() -> new DishNotFoundException(restId,dishId));
 
         if (dishUpdates.getName() != null) {
             dish.setName(dishUpdates.getName());

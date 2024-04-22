@@ -13,10 +13,8 @@ import static java.lang.Float.sum;
 @Table
 public class Restaurant {
     @Id
-//    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-//    @Column(unique = true) //TODO: TRIED THIS - DIDNT WORK HERE..
     private String name;
     private Boolean isKosher;
     private Set<String> cuisines;

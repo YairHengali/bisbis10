@@ -1,5 +1,7 @@
 package com.att.tdp.bisbis10.Restaurant;
 
+import com.att.tdp.bisbis10.Exceptions.RestaurantNameAlreadyExistException;
+import com.att.tdp.bisbis10.Exceptions.RestaurantNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -25,10 +27,10 @@ public class RestaurantService {
     }
 
     public void addNewRestaurant(Restaurant restaurantToAdd) {
-        Optional<Restaurant> restaurantByName = restaurantRepository.findRestaurantByName(restaurantToAdd.getName());
-        if(restaurantByName.isPresent()){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Restaurant with this name is already exist");
-        }
+//        Optional<Restaurant> restaurantByName = restaurantRepository.findRestaurantByName(restaurantToAdd.getName()); //todo: decide if need to validate this
+//        if(restaurantByName.isPresent()){
+//            throw new RestaurantNameAlreadyExistException(restaurantToAdd.getName());
+//        }
 
         restaurantRepository.save(restaurantToAdd);
     }
@@ -40,15 +42,14 @@ public class RestaurantService {
     }
 
     public Restaurant getRestaurantById(Long id) {
-        Optional<Restaurant> restaurantById = restaurantRepository.findById(id);
-        return restaurantById.orElseThrow(() ->
-                new ResponseStatusException(HttpStatus.NOT_FOUND, "Restaurant with this ID does not exist"));
+        return restaurantRepository.findById(id)
+                .orElseThrow(() -> new RestaurantNotFoundException(id));
     }
 
     @Transactional
     public void updateRestaurant(Long id, Restaurant restaurantUpdates) {
         Restaurant restaurant = restaurantRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Restaurant with this ID does not exist"));
+                .orElseThrow(() -> new RestaurantNotFoundException(id));
 
             if (restaurantUpdates.getName() != null) {
                 restaurant.setName(restaurantUpdates.getName());
@@ -62,10 +63,9 @@ public class RestaurantService {
     }
 
     public void deleteRestaurant(Long id) {
-//        boolean exists = restaurantRepository.existsById(id); //todo: needs to validate?? or its ok if not exist
-//        if(!exists){
-//
-//        }
+        if(!restaurantRepository.existsById(id)){ //todo: needs to validate?? or its ok if not exist
+            throw new RestaurantNotFoundException(id);
+        }
 
         restaurantRepository.deleteById(id);
     }

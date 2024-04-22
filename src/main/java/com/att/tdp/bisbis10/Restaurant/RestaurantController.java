@@ -23,7 +23,7 @@ public class RestaurantController {
     @GetMapping
     public List<Restaurant> getRestaurants(){
         return restaurantService.getRestaurants();
-    }
+    } //todo: maybe use dto here because not all data needed to be shown
 
     @GetMapping(params = "cuisine")
     public List<Restaurant> getRestaurantsByCuisine(@RequestParam("cuisine") String cuisine) {

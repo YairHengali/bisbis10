@@ -8,7 +8,7 @@ public class OrderItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne // todo: maybe some parameters here can resolve my problems? (fetch = FetchType.LAZY)
+    @ManyToOne // todo: maybe some parameters here can resolve my problems? (fetch = FetchType.LAZY), maybe this also: @JsonIgnore ?? read about it and understand
     @JoinColumn(name = "order_id") //TODO: when commenting those 2 lines it also worked
     private RestaurantOrder restaurantOrder;
     private Long dishId;
