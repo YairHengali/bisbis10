@@ -22,8 +22,28 @@ public class RestaurantService {
         this.restaurantRepository = restaurantRepository;
     }
 
-    public List<Restaurant> getRestaurants() {
-        return restaurantRepository.findAll();
+    public List<RestaurantDTO> getRestaurants() {
+        return restaurantRepository.findAll()
+                .stream()
+                .map(this::convertRestaurantToDTO)
+                .collect(Collectors.toList());
+    }
+
+    public List<RestaurantDTO> getRestaurantsByCuisine(String cuisine) {
+        return restaurantRepository.findAll().stream()
+                .filter(restaurant -> restaurant.getCuisines().contains(cuisine))
+                .map(this::convertRestaurantToDTO)
+                .collect(Collectors.toList());
+    }
+
+    private RestaurantDTO convertRestaurantToDTO(Restaurant restaurant){
+        return new RestaurantDTO(
+                restaurant.getId(),
+                restaurant.getName(),
+                restaurant.getAverageRating(),
+                restaurant.getIsKosher(),
+                restaurant.getCuisines()
+        );
     }
 
     public void addNewRestaurant(Restaurant restaurantToAdd) {
@@ -35,11 +55,7 @@ public class RestaurantService {
         restaurantRepository.save(restaurantToAdd);
     }
 
-    public List<Restaurant> getRestaurantsByCuisine(String cuisine) {
-        return restaurantRepository.findAll().stream()
-                .filter(restaurant -> restaurant.getCuisines().contains(cuisine))
-                .collect(Collectors.toList());
-    }
+
 
     public Restaurant getRestaurantById(Long id) {
         return restaurantRepository.findById(id)

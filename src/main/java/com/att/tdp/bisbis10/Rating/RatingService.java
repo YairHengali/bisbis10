@@ -17,11 +17,6 @@ public class RatingService {
         this.restaurantRepository = restaurantRepository;
     }
 
-
-    public void addRating(Rating ratingToAdd, Long restaurantId) {
-
-    }
-
     public void addRating(RatingRequest ratingRequest) {
         Restaurant restaurant = restaurantRepository.findById(ratingRequest.getRestaurantId())
                 .orElseThrow(() -> new RestaurantNotFoundException(ratingRequest.getRestaurantId()));
