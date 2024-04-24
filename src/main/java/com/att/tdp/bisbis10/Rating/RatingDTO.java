@@ -1,10 +1,10 @@
 package com.att.tdp.bisbis10.Rating;
 
-public class RatingRequest {
+public class RatingDTO {
     private Long restaurantId;
     private float rating;
 
-    public RatingRequest(Long restaurantId, float rating) {
+    public RatingDTO(Long restaurantId, float rating) {
         this.restaurantId = restaurantId;
         this.rating = rating;
     }

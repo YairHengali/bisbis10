@@ -17,10 +17,10 @@ public class RatingService {
         this.restaurantRepository = restaurantRepository;
     }
 
-    public void addRating(RatingRequest ratingRequest) {
-        Restaurant restaurant = restaurantRepository.findById(ratingRequest.getRestaurantId())
-                .orElseThrow(() -> new RestaurantNotFoundException(ratingRequest.getRestaurantId()));
+    public void addRating(RatingDTO ratingDTO) {
+        Restaurant restaurant = restaurantRepository.findById(ratingDTO.getRestaurantId())
+                .orElseThrow(() -> new RestaurantNotFoundException(ratingDTO.getRestaurantId()));
 
-        ratingRepository.save(new Rating(restaurant, ratingRequest.getRating()));
+        ratingRepository.save(new Rating(restaurant, ratingDTO.getRating()));
     }
 }

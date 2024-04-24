@@ -16,12 +16,12 @@ public class Dish {
     private Restaurant restaurant;
     private String name;
     private String description;
-    private Float price;
+    private Integer price;
 
     public Dish() {
     }
 
-    public Dish(Long id, Restaurant restaurant, String name, String description, Float price) {
+    public Dish(Long id, Restaurant restaurant, String name, String description, Integer price) {
         this.id = id;
         this.restaurant = restaurant;
         this.name = name;
@@ -57,11 +57,11 @@ public class Dish {
         this.description = description;
     }
 
-    public Float getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public void setPrice(Float price) {
+    public void setPrice(Integer price) {
         this.price = price;
     }
 }

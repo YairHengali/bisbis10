@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/ratings")
 public class RatingController {
-
     private final RatingService ratingService;
 
     @Autowired
@@ -18,8 +17,7 @@ public class RatingController {
     }
 
     @PostMapping
-    public void addRating(@RequestBody RatingRequest ratingRequest) {
-        ratingService.addRating(ratingRequest);
-//        return ResponseEntity.status(HttpStatus.OK).body("Rating added successfully");
+    public void addRating(@RequestBody RatingDTO ratingDTO) {
+        ratingService.addRating(ratingDTO);
     }
 }

@@ -2,7 +2,6 @@ package com.att.tdp.bisbis10.Restaurant;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,7 +10,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/restaurants")
 public class RestaurantController {
-
     private final RestaurantService restaurantService;
 
     @Autowired
@@ -35,8 +33,8 @@ public class RestaurantController {
     }
 
     @PostMapping()
-    public ResponseEntity<Void> addNewRestaurant(@RequestBody Restaurant restaurantToAdd){
-        restaurantService.addNewRestaurant(restaurantToAdd);
+    public ResponseEntity<Void> addRestaurant(@RequestBody Restaurant restaurantToAdd){
+        restaurantService.addRestaurant(restaurantToAdd);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 

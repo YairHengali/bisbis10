@@ -1,15 +1,11 @@
 package com.att.tdp.bisbis10.Restaurant;
 
-import com.att.tdp.bisbis10.Exceptions.RestaurantNameAlreadyExistException;
 import com.att.tdp.bisbis10.Exceptions.RestaurantNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -46,7 +42,7 @@ public class RestaurantService {
         );
     }
 
-    public void addNewRestaurant(Restaurant restaurantToAdd) {
+    public void addRestaurant(Restaurant restaurantToAdd) {
 //        Optional<Restaurant> restaurantByName = restaurantRepository.findRestaurantByName(restaurantToAdd.getName()); //todo: decide if need to validate this
 //        if(restaurantByName.isPresent()){
 //            throw new RestaurantNameAlreadyExistException(restaurantToAdd.getName());
