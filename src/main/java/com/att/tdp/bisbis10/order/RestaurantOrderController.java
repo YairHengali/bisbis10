@@ -1,5 +1,6 @@
 package com.att.tdp.bisbis10.order;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,7 @@ public class RestaurantOrderController {
     }
 
     @PostMapping
-    public ResponseEntity<Map<String,String>> addOrder(@RequestBody RestaurantOrder restaurantOrder) {
+    public ResponseEntity<Map<String,String>> addOrder(@RequestBody @Valid RestaurantOrder restaurantOrder) {
         restaurantOrderService.addOrder(restaurantOrder);
         return ResponseEntity.status(HttpStatus.OK).body(Collections.singletonMap("orderId", restaurantOrder.getId().toString()));
     }

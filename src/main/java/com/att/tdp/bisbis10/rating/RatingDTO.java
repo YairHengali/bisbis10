@@ -1,27 +1,24 @@
 package com.att.tdp.bisbis10.rating;
 
-public class RatingDTO {
-    private Long restaurantId;
-    private float rating;
+import jakarta.validation.constraints.*;
 
-    public RatingDTO(Long restaurantId, float rating) {
+public record RatingDTO(@NotNull(message = "Restaurant ID is mandatory") Long restaurantId,
+                        @NotNull(message = "rating is mandatory")
+                        @Min(value = 0, message = "rating must be between 0 to 5")
+                        @Max(value = 5, message = "rating must be between 0 to 5") Float rating) {
+    public RatingDTO(Long restaurantId, Float rating) {
         this.restaurantId = restaurantId;
         this.rating = rating;
     }
 
-    public Long getRestaurantId() {
+    @Override
+    public Long restaurantId() {
         return restaurantId;
     }
 
-    public void setRestaurantId(Long restaurantId) {
-        this.restaurantId = restaurantId;
-    }
-
-    public float getRating() {
+    @Override
+    public Float rating() {
         return rating;
     }
 
-    public void setRating(float rating) {
-        this.rating = rating;
-    }
 }

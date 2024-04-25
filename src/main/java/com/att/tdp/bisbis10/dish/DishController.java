@@ -1,5 +1,6 @@
 package com.att.tdp.bisbis10.dish;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,8 +19,8 @@ public class DishController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> addDishToRest(@PathVariable("id") Long restId, @RequestBody Dish dishToAdd) {
-        dishService.addDish(restId, dishToAdd);
+    public ResponseEntity<Void> addDishToRest(@PathVariable("id") Long restId, @RequestBody @Valid DishRequestDTO dishRequestDTO) {
+        dishService.addDish(restId, dishRequestDTO);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 

@@ -1,10 +1,15 @@
 package com.att.tdp.bisbis10.order;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 @Embeddable
 public class OrderItem {
+    @NotNull(message = "dish ID is mandatory")
     private Long dishId;
+    @NotNull(message = "amount is mandatory")
+    @Positive(message = "amount must be positive")
     private Integer amount;
 
     public OrderItem(){

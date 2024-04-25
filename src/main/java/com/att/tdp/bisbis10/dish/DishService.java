@@ -22,12 +22,12 @@ public class DishService {
     }
 
     @Transactional
-    public void addDish(Long restId, Dish dishToAdd) {
+    public void addDish(Long restId, DishRequestDTO dishRequestDTO) {
         Restaurant restaurant = restaurantRepository.findById(restId)
                 .orElseThrow(() -> new RestaurantNotFoundException(restId));
 
-        dishToAdd.setRestaurant(restaurant);
-        dishRepository.save(dishToAdd);
+//        dishToAdd.setRestaurant(restaurant);
+        dishRepository.save(new Dish(restaurant, dishRequestDTO.name(), dishRequestDTO.description(), dishRequestDTO.price()));
     }
 
     public Set<Dish> getDishesFromRest(Long restId) {

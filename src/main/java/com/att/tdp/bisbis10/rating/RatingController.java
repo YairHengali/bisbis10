@@ -1,5 +1,6 @@
 package com.att.tdp.bisbis10.rating;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,7 +18,7 @@ public class RatingController {
     }
 
     @PostMapping
-    public void addRating(@RequestBody RatingDTO ratingDTO) {
+    public void addRating(@RequestBody @Valid RatingDTO ratingDTO) {
         ratingService.addRating(ratingDTO);
     }
 }

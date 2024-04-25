@@ -26,8 +26,7 @@ public class Restaurant {
     public Restaurant() {
     }
 
-    public Restaurant(Long id, String name, Boolean isKosher, Set<String> cuisines) {
-        this.id = id;
+    public Restaurant(String name, Boolean isKosher, Set<String> cuisines) {
         this.name = name;
         this.isKosher = isKosher;
         this.cuisines = cuisines;

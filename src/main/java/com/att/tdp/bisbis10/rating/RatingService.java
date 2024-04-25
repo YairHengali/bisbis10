@@ -18,9 +18,9 @@ public class RatingService {
     }
 
     public void addRating(RatingDTO ratingDTO) {
-        Restaurant restaurant = restaurantRepository.findById(ratingDTO.getRestaurantId())
-                .orElseThrow(() -> new RestaurantNotFoundException(ratingDTO.getRestaurantId()));
+        Restaurant restaurant = restaurantRepository.findById(ratingDTO.restaurantId())
+                .orElseThrow(() -> new RestaurantNotFoundException(ratingDTO.restaurantId()));
 
-        ratingRepository.save(new Rating(restaurant, ratingDTO.getRating()));
+        ratingRepository.save(new Rating(restaurant, ratingDTO.rating()));
     }
 }

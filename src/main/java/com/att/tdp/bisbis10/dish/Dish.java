@@ -2,6 +2,7 @@ package com.att.tdp.bisbis10.dish;
 
 import com.att.tdp.bisbis10.restaurant.Restaurant;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table
@@ -20,8 +21,7 @@ public class Dish {
     public Dish() {
     }
 
-    public Dish(Long id, Restaurant restaurant, String name, String description, Integer price) {
-        this.id = id;
+    public Dish(Restaurant restaurant, String name, String description, Integer price) {
         this.restaurant = restaurant;
         this.name = name;
         this.description = description;

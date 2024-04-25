@@ -20,18 +20,18 @@ public class RestaurantService {
     public List<RestaurantResponseDTO> getRestaurants() {
         return restaurantRepository.findAll()
                 .stream()
-                .map(this::convertRestaurantToDTO)
+                .map(this::convertRestaurantToResponseDTO)
                 .collect(Collectors.toList());
     }
 
     public List<RestaurantResponseDTO> getRestaurantsByCuisine(String cuisine) {
         return restaurantRepository.findAll().stream()
                 .filter(restaurant -> restaurant.getCuisines().contains(cuisine))
-                .map(this::convertRestaurantToDTO)
+                .map(this::convertRestaurantToResponseDTO)
                 .collect(Collectors.toList());
     }
 
-    private RestaurantResponseDTO convertRestaurantToDTO(Restaurant restaurant){
+    private RestaurantResponseDTO convertRestaurantToResponseDTO(Restaurant restaurant){
         return new RestaurantResponseDTO(
                 restaurant.getId(),
                 restaurant.getName(),
@@ -41,13 +41,13 @@ public class RestaurantService {
         );
     }
 
-    public void addRestaurant(Restaurant restaurantToAdd) {
+    public void addRestaurant(RestaurantRequestDTO restaurantToAdd) {
 //        Optional<Restaurant> restaurantByName = restaurantRepository.findRestaurantByName(restaurantToAdd.getName());
 //        if(restaurantByName.isPresent()){
 //            throw new RestaurantNameAlreadyExistException(restaurantToAdd.getName());
 //        }
 
-        restaurantRepository.save(restaurantToAdd);
+        restaurantRepository.save(new Restaurant(restaurantToAdd.name(), restaurantToAdd.isKosher(), restaurantToAdd.cuisines()));
     }
 
     public Restaurant getRestaurantById(Long id) {

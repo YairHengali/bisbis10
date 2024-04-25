@@ -1,5 +1,6 @@
 package com.att.tdp.bisbis10.restaurant;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,7 +34,7 @@ public class RestaurantController {
     }
 
     @PostMapping()
-    public ResponseEntity<Void> addRestaurant(@RequestBody Restaurant restaurantToAdd){
+    public ResponseEntity<Void> addRestaurant(@Valid @RequestBody RestaurantRequestDTO restaurantToAdd){
         restaurantService.addRestaurant(restaurantToAdd);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }

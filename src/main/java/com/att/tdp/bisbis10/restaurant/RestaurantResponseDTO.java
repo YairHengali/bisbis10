@@ -3,11 +3,11 @@ package com.att.tdp.bisbis10.restaurant;
 import java.util.Set;
 
 public class RestaurantResponseDTO {
-    private Long id;
-    private String name;
-    private Float averageRating;
-    private Boolean isKosher;
-    private Set<String> cuisines;
+    private final Long id;
+    private final String name;
+    private final Float averageRating;
+    private final Boolean isKosher;
+    private final Set<String> cuisines;
 
     public RestaurantResponseDTO(Long id, String name, Float averageRating, Boolean isKosher, Set<String> cuisines) {
         this.id = id;
@@ -21,39 +21,19 @@ public class RestaurantResponseDTO {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public Float getAverageRating() {
         return averageRating;
     }
 
-    public void setAverageRating(Float averageRating) {
-        this.averageRating = averageRating;
-    }
-
-    public Boolean getIsKosher() {
+    public Boolean getKosher() {
         return isKosher;
-    }
-
-    public void setIsKosher(Boolean isKosher) {
-        this.isKosher = isKosher;
     }
 
     public Set<String> getCuisines() {
         return cuisines;
-    }
-
-    public void setCuisines(Set<String> cuisines) {
-        this.cuisines = cuisines;
     }
 }
