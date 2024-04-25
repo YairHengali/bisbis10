@@ -1,8 +1,8 @@
-package com.att.tdp.bisbis10.Rating;
+package com.att.tdp.bisbis10.rating;
 
-import com.att.tdp.bisbis10.Exceptions.RestaurantNotFoundException;
-import com.att.tdp.bisbis10.Restaurant.Restaurant;
-import com.att.tdp.bisbis10.Restaurant.RestaurantRepository;
+import com.att.tdp.bisbis10.exceptions.RestaurantNotFoundException;
+import com.att.tdp.bisbis10.restaurant.Restaurant;
+import com.att.tdp.bisbis10.restaurant.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

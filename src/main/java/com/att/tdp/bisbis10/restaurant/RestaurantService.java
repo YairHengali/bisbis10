@@ -1,6 +1,6 @@
-package com.att.tdp.bisbis10.Restaurant;
+package com.att.tdp.bisbis10.restaurant;
 
-import com.att.tdp.bisbis10.Exceptions.RestaurantNotFoundException;
+import com.att.tdp.bisbis10.exceptions.RestaurantNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 
 @Service
 public class RestaurantService {
-
     private final RestaurantRepository restaurantRepository;
 
     @Autowired
@@ -18,22 +17,22 @@ public class RestaurantService {
         this.restaurantRepository = restaurantRepository;
     }
 
-    public List<RestaurantDTO> getRestaurants() {
+    public List<RestaurantResponseDTO> getRestaurants() {
         return restaurantRepository.findAll()
                 .stream()
                 .map(this::convertRestaurantToDTO)
                 .collect(Collectors.toList());
     }
 
-    public List<RestaurantDTO> getRestaurantsByCuisine(String cuisine) {
+    public List<RestaurantResponseDTO> getRestaurantsByCuisine(String cuisine) {
         return restaurantRepository.findAll().stream()
                 .filter(restaurant -> restaurant.getCuisines().contains(cuisine))
                 .map(this::convertRestaurantToDTO)
                 .collect(Collectors.toList());
     }
 
-    private RestaurantDTO convertRestaurantToDTO(Restaurant restaurant){
-        return new RestaurantDTO(
+    private RestaurantResponseDTO convertRestaurantToDTO(Restaurant restaurant){
+        return new RestaurantResponseDTO(
                 restaurant.getId(),
                 restaurant.getName(),
                 restaurant.getAverageRating(),
@@ -43,15 +42,13 @@ public class RestaurantService {
     }
 
     public void addRestaurant(Restaurant restaurantToAdd) {
-//        Optional<Restaurant> restaurantByName = restaurantRepository.findRestaurantByName(restaurantToAdd.getName()); //todo: decide if need to validate this
+//        Optional<Restaurant> restaurantByName = restaurantRepository.findRestaurantByName(restaurantToAdd.getName());
 //        if(restaurantByName.isPresent()){
 //            throw new RestaurantNameAlreadyExistException(restaurantToAdd.getName());
 //        }
 
         restaurantRepository.save(restaurantToAdd);
     }
-
-
 
     public Restaurant getRestaurantById(Long id) {
         return restaurantRepository.findById(id)
@@ -75,7 +72,7 @@ public class RestaurantService {
     }
 
     public void deleteRestaurant(Long id) {
-        if(!restaurantRepository.existsById(id)){ //todo: needs to validate?? or its ok if not exist
+        if(!restaurantRepository.existsById(id)){
             throw new RestaurantNotFoundException(id);
         }
 

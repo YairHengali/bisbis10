@@ -1,9 +1,9 @@
-package com.att.tdp.bisbis10.Dish;
+package com.att.tdp.bisbis10.dish;
 
-import com.att.tdp.bisbis10.Exceptions.DishNotFoundException;
-import com.att.tdp.bisbis10.Exceptions.RestaurantNotFoundException;
-import com.att.tdp.bisbis10.Restaurant.Restaurant;
-import com.att.tdp.bisbis10.Restaurant.RestaurantRepository;
+import com.att.tdp.bisbis10.exceptions.DishNotFoundException;
+import com.att.tdp.bisbis10.exceptions.RestaurantNotFoundException;
+import com.att.tdp.bisbis10.restaurant.Restaurant;
+import com.att.tdp.bisbis10.restaurant.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +21,7 @@ public class DishService {
         this.restaurantRepository = restaurantRepository;
     }
 
+    @Transactional
     public void addDish(Long restId, Dish dishToAdd) {
         Restaurant restaurant = restaurantRepository.findById(restId)
                 .orElseThrow(() -> new RestaurantNotFoundException(restId));
@@ -56,6 +57,6 @@ public class DishService {
     }
 
     public void deleteDishInRest(Long restId, Long dishId) {
-        dishRepository.deleteById(dishId); //TODO: need to update, because need to go to rest by ID and only there the IDs of dish are uniques
+        dishRepository.deleteById(dishId);
     }
 }

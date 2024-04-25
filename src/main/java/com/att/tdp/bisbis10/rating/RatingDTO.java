@@ -1,4 +1,4 @@
-package com.att.tdp.bisbis10.Rating;
+package com.att.tdp.bisbis10.rating;
 
 public class RatingDTO {
     private Long restaurantId;

@@ -1,15 +1,14 @@
-package com.att.tdp.bisbis10.Order;
-
-import com.att.tdp.bisbis10.Dish.DishRepository;
-import com.att.tdp.bisbis10.Exceptions.DishNotFoundException;
-import com.att.tdp.bisbis10.Exceptions.RestaurantNotFoundException;
-import com.att.tdp.bisbis10.Restaurant.RestaurantRepository;
+package com.att.tdp.bisbis10.order;
+import com.att.tdp.bisbis10.dish.DishRepository;
+import com.att.tdp.bisbis10.exceptions.DishNotFoundException;
+import com.att.tdp.bisbis10.exceptions.RestaurantNotFoundException;
+import com.att.tdp.bisbis10.restaurant.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class RestaurantOrderService {
-
     private final RestaurantOrderRepository restaurantOrderRepository;
     private final RestaurantRepository restaurantRepository;
     private final DishRepository dishRepository;
@@ -21,6 +20,7 @@ public class RestaurantOrderService {
         this.dishRepository = dishRepository;
     }
 
+    @Transactional
     public void addOrder(RestaurantOrder restaurantOrder) {
         restaurantRepository.findById(restaurantOrder.getRestaurantId())
                 .orElseThrow(() -> new RestaurantNotFoundException(restaurantOrder.getRestaurantId()));

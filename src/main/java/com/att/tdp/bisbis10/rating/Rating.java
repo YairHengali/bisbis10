@@ -1,6 +1,6 @@
-package com.att.tdp.bisbis10.Rating;
+package com.att.tdp.bisbis10.rating;
 
-import com.att.tdp.bisbis10.Restaurant.Restaurant;
+import com.att.tdp.bisbis10.restaurant.Restaurant;
 import jakarta.persistence.*;
 
 @Entity

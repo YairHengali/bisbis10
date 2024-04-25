@@ -1,13 +1,11 @@
-package com.att.tdp.bisbis10.Restaurant;
+package com.att.tdp.bisbis10.restaurant;
 
-import com.att.tdp.bisbis10.Dish.Dish;
-import com.att.tdp.bisbis10.Rating.Rating;
+import com.att.tdp.bisbis10.dish.Dish;
+import com.att.tdp.bisbis10.rating.Rating;
 import jakarta.persistence.*;
 
 import java.util.List;
 import java.util.Set;
-
-import static java.lang.Float.sum;
 
 @Entity
 @Table
@@ -57,12 +55,11 @@ public class Restaurant {
         }
 
         float ratingsSum = 0;
-        for( Rating rating : ratings){
+        for (Rating rating : ratings){
             ratingsSum += rating.getRating();
         }
 
         return ratingsSum / ratings.size();
-
     }
 
     public Boolean getIsKosher() {
@@ -81,7 +78,7 @@ public class Restaurant {
         this.cuisines = cuisines;
     }
 
-    public Set<Dish> getDishes() { //TODO: needed or not? print in each get or only by id??
+    public Set<Dish> getDishes() {
         return dishes;
     }
 }

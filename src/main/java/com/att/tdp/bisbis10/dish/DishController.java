@@ -1,12 +1,10 @@
-package com.att.tdp.bisbis10.Dish;
+package com.att.tdp.bisbis10.dish;
 
-import com.att.tdp.bisbis10.Restaurant.Restaurant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -33,7 +31,7 @@ public class DishController {
     @PutMapping("/{dishId}")
     public void updateDishInRest(@PathVariable("id") Long restId, @PathVariable("dishId") Long dishId, @RequestBody Dish dishUpdates){
         dishService.updateDishInRest(restId, dishId, dishUpdates);
-    } //TODO each Dish need to be uniq ID in each rest.. so can try to change it (right know each one is unique ID everywhere)
+    }
 
     @DeleteMapping("/{dishId}")
     public ResponseEntity<Void> deleteDishInRest(@PathVariable("id") Long restId, @PathVariable("dishId") Long dishId) {

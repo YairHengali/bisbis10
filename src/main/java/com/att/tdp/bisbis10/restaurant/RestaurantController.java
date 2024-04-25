@@ -1,4 +1,4 @@
-package com.att.tdp.bisbis10.Restaurant;
+package com.att.tdp.bisbis10.restaurant;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,16 +18,16 @@ public class RestaurantController {
     }
 
     @GetMapping
-    public List<RestaurantDTO> getRestaurants(){
+    public List<RestaurantResponseDTO> getRestaurants(){
         return restaurantService.getRestaurants();
     }
 
     @GetMapping(params = "cuisine")
-    public List<RestaurantDTO> getRestaurantsByCuisine(@RequestParam("cuisine") String cuisine) {
+    public List<RestaurantResponseDTO> getRestaurantsByCuisine(@RequestParam("cuisine") String cuisine) {
         return restaurantService.getRestaurantsByCuisine(cuisine);
     }
 
-    @GetMapping("/{id}")     //TODO: return all the details from id
+    @GetMapping("/{id}")
     public Restaurant getRestaurantById(@PathVariable("id") Long id) {
         return restaurantService.getRestaurantById(id);
     }

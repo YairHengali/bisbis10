@@ -1,20 +1,15 @@
-package com.att.tdp.bisbis10.Restaurant;
+package com.att.tdp.bisbis10.restaurant;
 
-import com.att.tdp.bisbis10.Dish.Dish;
-import com.att.tdp.bisbis10.Rating.Rating;
-import jakarta.persistence.*;
-
-import java.util.List;
 import java.util.Set;
 
-public class RestaurantDTO {
+public class RestaurantResponseDTO {
     private Long id;
     private String name;
     private Float averageRating;
     private Boolean isKosher;
     private Set<String> cuisines;
 
-    public RestaurantDTO(Long id, String name, Float averageRating, Boolean isKosher, Set<String> cuisines) {
+    public RestaurantResponseDTO(Long id, String name, Float averageRating, Boolean isKosher, Set<String> cuisines) {
         this.id = id;
         this.name = name;
         this.averageRating = averageRating;
@@ -51,7 +46,7 @@ public class RestaurantDTO {
     }
 
     public void setIsKosher(Boolean isKosher) {
-        isKosher = isKosher;
+        this.isKosher = isKosher;
     }
 
     public Set<String> getCuisines() {

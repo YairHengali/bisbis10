@@ -1,11 +1,10 @@
-package com.att.tdp.bisbis10.Dish;
+package com.att.tdp.bisbis10.dish;
 
-import com.att.tdp.bisbis10.Restaurant.Restaurant;
+import com.att.tdp.bisbis10.restaurant.Restaurant;
 import jakarta.persistence.*;
 
 @Entity
 @Table
-//@Table(uniqueConstraints = {@UniqueConstraint(columnNames = {"restaurantId", "name"})})
 
 public class Dish {
     @Id

@@ -1,4 +1,4 @@
-package com.att.tdp.bisbis10.Rating;
+package com.att.tdp.bisbis10.rating;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
