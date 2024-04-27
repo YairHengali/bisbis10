@@ -2,7 +2,6 @@ package com.att.tdp.bisbis10.dish;
 
 import com.att.tdp.bisbis10.restaurant.Restaurant;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table

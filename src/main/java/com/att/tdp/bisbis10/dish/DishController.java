@@ -30,7 +30,7 @@ public class DishController {
     }
 
     @PutMapping("/{dishId}")
-    public void updateDishInRest(@PathVariable("id") Long restId, @PathVariable("dishId") Long dishId, @RequestBody Dish dishUpdates){
+    public void updateDishInRest(@PathVariable("id") Long restId, @PathVariable("dishId") Long dishId, @RequestBody DishRequestDTO dishUpdates){
         dishService.updateDishInRest(restId, dishId, dishUpdates);
     }
 

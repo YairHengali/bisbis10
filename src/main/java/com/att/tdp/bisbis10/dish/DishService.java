@@ -1,12 +1,15 @@
 package com.att.tdp.bisbis10.dish;
 
 import com.att.tdp.bisbis10.exceptions.DishNotFoundException;
+import com.att.tdp.bisbis10.exceptions.EmptyNameException;
 import com.att.tdp.bisbis10.exceptions.RestaurantNotFoundException;
 import com.att.tdp.bisbis10.restaurant.Restaurant;
 import com.att.tdp.bisbis10.restaurant.RestaurantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.Set;
 
@@ -38,21 +41,27 @@ public class DishService {
     }
 
     @Transactional
-    public void updateDishInRest(Long restId, Long dishId, Dish dishUpdates) {
+    public void updateDishInRest(Long restId, Long dishId, DishRequestDTO dishUpdates) {
         restaurantRepository.findById(restId)
                 .orElseThrow(() -> new RestaurantNotFoundException(restId));
 
         Dish dish = dishRepository.findDishByRestaurantIdAndId(restId,dishId)
                 .orElseThrow(() -> new DishNotFoundException(restId,dishId));
 
-        if (dishUpdates.getName() != null) {
-            dish.setName(dishUpdates.getName());
+        if (dishUpdates.name() != null) {
+            if(dishUpdates.name().isEmpty()){
+                throw new EmptyNameException();
+            }
+            dish.setName(dishUpdates.name());
         }
-        if (dishUpdates.getDescription() != null){
-            dish.setDescription(dishUpdates.getDescription());
+        if (dishUpdates.description() != null){
+            dish.setDescription(dishUpdates.description());
         }
-        if (dishUpdates.getPrice() != null) {
-            dish.setPrice(dishUpdates.getPrice());
+        if (dishUpdates.price() != null) {
+            if(dishUpdates.price() <= 0){
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "price must be positive");
+            }
+            dish.setPrice(dishUpdates.price());
         }
     }
 

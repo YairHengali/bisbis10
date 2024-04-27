@@ -25,12 +25,6 @@ public class RestaurantOrder {
     public RestaurantOrder() {
     }
 
-    public RestaurantOrder(UUID id, Long restaurantId, List<OrderItem> orderItems) {
-        this.id = id;
-        this.restaurantId = restaurantId;
-        this.orderItems = orderItems;
-    }
-
     public UUID getId() {
         return id;
     }

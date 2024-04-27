@@ -17,9 +17,10 @@ public class Restaurant {
     @Transient
     private Float averageRating;
     private Boolean isKosher;
+    @ElementCollection //todo: check if ruined something
     private Set<String> cuisines;
     @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
-    private Set<Dish> dishes;
+    private List<Dish> dishes;
     @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
     private List<Rating> ratings;
 
@@ -77,7 +78,7 @@ public class Restaurant {
         this.cuisines = cuisines;
     }
 
-    public Set<Dish> getDishes() {
+    public List<Dish> getDishes() {
         return dishes;
     }
 }
