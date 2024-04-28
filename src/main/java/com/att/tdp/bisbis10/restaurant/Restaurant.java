@@ -17,7 +17,7 @@ public class Restaurant {
     @Transient
     private Float averageRating;
     private Boolean isKosher;
-    @ElementCollection //todo: check if ruined something
+    @ElementCollection
     private Set<String> cuisines;
     @OneToMany(mappedBy = "restaurant", cascade = CascadeType.ALL)
     private List<Dish> dishes;

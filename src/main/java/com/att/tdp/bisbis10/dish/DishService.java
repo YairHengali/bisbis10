@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.Set;
+import java.util.List;
 
 @Service
 public class DishService {
@@ -29,11 +29,10 @@ public class DishService {
         Restaurant restaurant = restaurantRepository.findById(restId)
                 .orElseThrow(() -> new RestaurantNotFoundException(restId));
 
-//        dishToAdd.setRestaurant(restaurant);
         dishRepository.save(new Dish(restaurant, dishRequestDTO.name(), dishRequestDTO.description(), dishRequestDTO.price()));
     }
 
-    public Set<Dish> getDishesFromRest(Long restId) {
+    public List<Dish> getDishesFromRest(Long restId) {
         restaurantRepository.findById(restId)
                 .orElseThrow(() -> new RestaurantNotFoundException(restId));
 

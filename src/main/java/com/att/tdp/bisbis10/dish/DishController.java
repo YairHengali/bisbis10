@@ -6,10 +6,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Set;
+import java.util.List;
 
 @RestController
-@RequestMapping("/restaurants/{id}/dishes")
+@RequestMapping("/restaurants/{restId}/dishes")
 public class DishController {
     private final DishService dishService;
 
@@ -19,23 +19,23 @@ public class DishController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> addDishToRest(@PathVariable("id") Long restId, @RequestBody @Valid DishRequestDTO dishRequestDTO) {
+    public ResponseEntity<Void> addDishToRest(@PathVariable("restId") Long restId, @RequestBody @Valid DishRequestDTO dishRequestDTO) {
         dishService.addDish(restId, dishRequestDTO);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @GetMapping
-    public Set<Dish> getDishesFromRest(@PathVariable("id") Long restId){
+    public List<Dish> getDishesFromRest(@PathVariable("restId") Long restId){
            return dishService.getDishesFromRest(restId);
     }
 
     @PutMapping("/{dishId}")
-    public void updateDishInRest(@PathVariable("id") Long restId, @PathVariable("dishId") Long dishId, @RequestBody DishRequestDTO dishUpdates){
+    public void updateDishInRest(@PathVariable("restId") Long restId, @PathVariable("dishId") Long dishId, @RequestBody DishRequestDTO dishUpdates){
         dishService.updateDishInRest(restId, dishId, dishUpdates);
     }
 
     @DeleteMapping("/{dishId}")
-    public ResponseEntity<Void> deleteDishInRest(@PathVariable("id") Long restId, @PathVariable("dishId") Long dishId) {
+    public ResponseEntity<Void> deleteDishInRest(@PathVariable("restId") Long restId, @PathVariable("dishId") Long dishId) {
         dishService.deleteDishInRest(restId, dishId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
