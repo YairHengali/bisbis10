@@ -65,6 +65,12 @@ public class DishService {
     }
 
     public void deleteDishInRest(Long restId, Long dishId) {
+        if(!restaurantRepository.existsById(restId)){
+            throw new RestaurantNotFoundException(restId);
+        }
+        if(!dishRepository.existsById(dishId)){
+            throw new DishNotFoundException(restId, dishId);
+        }
         dishRepository.deleteById(dishId);
     }
 }
