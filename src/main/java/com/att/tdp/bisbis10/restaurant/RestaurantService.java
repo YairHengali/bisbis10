@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -59,42 +58,27 @@ public class RestaurantService {
                 .orElseThrow(() -> new RestaurantNotFoundException(id));
     }
 
-//    @Transactional
-//    public void updateRestaurant(Long id, Restaurant restaurantUpdates) {
-//        Restaurant restaurant = restaurantRepository.findById(id)
-//                .orElseThrow(() -> new RestaurantNotFoundException(id));
-//
-//            if (restaurantUpdates.getName() != null) {
-//                restaurant.setName(restaurantUpdates.getName());
-//            }
-//            if (restaurantUpdates.getIsKosher() != null){
-//                restaurant.setIsKosher(restaurantUpdates.getIsKosher());
-//            }
-//            if (restaurantUpdates.getCuisines() != null) {
-//                restaurant.setCuisines(restaurantUpdates.getCuisines());
-//            }
-//    }
-@Transactional
-public void updateRestaurant(Long id, RestaurantRequestDTO restaurantUpdates) {
-    Restaurant restaurant = restaurantRepository.findById(id)
-            .orElseThrow(() -> new RestaurantNotFoundException(id));
+    @Transactional
+    public void updateRestaurant(Long id, RestaurantRequestDTO restaurantUpdates) {
+        Restaurant restaurant = restaurantRepository.findById(id)
+                .orElseThrow(() -> new RestaurantNotFoundException(id));
 
-    if (restaurantUpdates.name() != null) {
-        if (restaurantUpdates.name().isEmpty()) {
-            throw new EmptyNameException();
+        if (restaurantUpdates.name() != null) {
+            if (restaurantUpdates.name().isEmpty()) {
+                throw new EmptyNameException();
+            }
+            restaurant.setName(restaurantUpdates.name());
         }
-        restaurant.setName(restaurantUpdates.name());
-    }
 
-    if (restaurantUpdates.isKosher() != null){
-        restaurant.setIsKosher(restaurantUpdates.isKosher());
-    }
-    if (restaurantUpdates.cuisines() != null) {
-        if (restaurantUpdates.cuisines().isEmpty()) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "cuisines must contain at least one cuisine");
+        if (restaurantUpdates.isKosher() != null){
+            restaurant.setIsKosher(restaurantUpdates.isKosher());
         }
-        restaurant.setCuisines(restaurantUpdates.cuisines());
-    }
+        if (restaurantUpdates.cuisines() != null) {
+            if (restaurantUpdates.cuisines().isEmpty()) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "cuisines must contain at least one cuisine");
+            }
+            restaurant.setCuisines(restaurantUpdates.cuisines());
+        }
 }
 
     public void deleteRestaurant(Long id) {
